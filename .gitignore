@@ -25,4 +25,4 @@ test.py
 dockerbuild.sh
 
 # model ignore
-tts_models/KusanagiNene/
+KusanagiNene
