@@ -17,6 +17,7 @@ args = parser.parse_args()
 port = args.port
 host = args.bind_addr
 
+
 # 일본어 문장 나누는 함수
 # import MeCab
 # def split_text_by_mecab(text, length=30):
