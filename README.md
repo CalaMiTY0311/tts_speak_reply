@@ -26,6 +26,34 @@
 3. pip install -r requirements.txt 로 패키지 다운로드
 4. python api.py로 서버 실행
 
+## 엔드포인트
+**POST** `/character/kusanagiNene`
+
+## 요청(Request)
+### 헤더
+- `Content-Type`: `application/json`
+
+### 요청 본문 (JSON)
+```json
+{
+    "emotion": "",          // (선택) 감정 설정 angry, sad, surprise ...
+    "prompt_text": "",       // (선택) 추가 프롬프트
+    "text": "<음성 변환할 텍스트>",  // (필수) 변환할 텍스트
+    "text_language": "ja",   // (필수) ja로 고정해주세요
+    "cut_punc": true          // (선택) 문장 부호를 제거할지 여부 (기본값: false)
+}
+```
+
+## 응답(Response)
+### 성공 (HTTP 200)
+- **Content-Type**: `audio/mpeg`
+- **Body**: MP3 스트리밍 데이터
+
+## 참고 사항
+- 감정(`emotion`)는 선택 사항입니다.
+- 텍스트(`text`)는 필수 입력값이며, 최대 길이 제한이 있을 수 있습니다.
+- 응답은 MP3 오디오 스트리밍 형식이며, 클라이언트는 이를 파일로 저장하거나 직접 재생할 수 있습니다.
+
 ### 추후 업데이트 예정
 - 필자 외 일반 사용자를 위한 코드 리팩토링 및 간편화
 - 다국어 지원 예정(영어, 한국어)
