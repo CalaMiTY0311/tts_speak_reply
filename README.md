@@ -4,6 +4,9 @@
 - GPT-Sovits로 만든 TTS모델(일본어)을 활용하여 텍스트를 wav형태로 스트리밍하여 결과를 보여주는 API입니다. 
 - TTS 모델을 사용하여 일본어 텍스트(한자 포함)를 추론하여 음성으로 변환합니다.
 
+## Special Thanks
+### [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS?tab=MIT-1-ov-file)
+
 ## 요구 사항
 ```bash
 - os: window
