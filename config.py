@@ -15,8 +15,8 @@ bert_path = "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large"
 # pretrained_sovits_path = "GPT_SoVITS/pretrained_models/s2G488k.pth"
 # pretrained_gpt_path = "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt"
 
-pretrained_sovits_path = "tts_models/hello_e8_s6592.pth"        # sovits모델 경로
-pretrained_gpt_path = "tts_models/hello-e15.ckpt"               # gpt 모델 경로
+# pretrained_sovits_path = "tts_models/hello_e8_s6592.pth"        # sovits모델 경로
+# pretrained_gpt_path = "tts_models/hello-e15.ckpt"               # gpt 모델 경로
 
 prompt_language = "all_ja"
 text_language = "ja"
@@ -27,7 +27,6 @@ if torch.cuda.is_available():
     infer_device = "cuda"
 else:
     infer_device = "cpu"
-
 
 api_port = 9880
 
@@ -53,8 +52,8 @@ class Config:
 
         self.cnhubert_path = cnhubert_path
         self.bert_path = bert_path
-        self.pretrained_sovits_path = pretrained_sovits_path
-        self.pretrained_gpt_path = pretrained_gpt_path
+        # self.pretrained_sovits_path = pretrained_sovits_path
+        # self.pretrained_gpt_path = pretrained_gpt_path
 
         self.exp_root = exp_root
         self.python_exec = python_exec

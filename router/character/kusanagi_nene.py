@@ -8,8 +8,12 @@ from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse, JSONResponse
 from router.options import get_character_models, get_emotion, get_tts_wav, cut_text, media_type
 from router.options import change_gpt_weights, change_sovits_weights
+from router.router_config import Config
 
-models_base = os.path.abspath("tts_models")
+router_config = Config()
+models_base = router_config.models_base
+
+# models_base = os.path.abspath("tts_models")
 character = "KusanagiNene"
 gpt_path = os.environ.get("gpt_path", get_character_models(models_base, character, ".ckpt"))
 sovits_path = os.environ.get("sovits_path", get_character_models(models_base, character, ".pth"))

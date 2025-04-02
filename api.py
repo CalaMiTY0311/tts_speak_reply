@@ -46,5 +46,8 @@ app.include_router(kusanagi_nene, prefix="/character")
 @app.post("/")
 async def test():
     return {"asdf" : "asdf"}
+
 if __name__ == "__main__":
     uvicorn.run(app, host=host, port=port, workers=1)
+
+
