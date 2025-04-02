@@ -20,7 +20,8 @@
 ### 사용 방법
 1. 터미널에 git clone https://github.com/CalaMiTY0311/tts_speak_reply.git 으로 프로젝트 가져옵니다 ( 구동은 가능하면 바탕화면이아닌 드라이브에서 하는게 좋아요 ex-> C: )
 2. [모델 폴더 다운URL](https://drive.google.com/drive/folders/1Wo7fvbUPaI-DoRUZaMEfcjGvNg7WKz-z?usp=drive_link)에서 필자의 tts_models폴더를 다운받아서 api.py와 같은 위치에 놓으면 OK
-3. python api.py로 서버 실행
+3. pip install -r requirements.txt 로 패키지 다운로드
+4. python api.py로 서버 실행
 
 ### 추후 업데이트 예정
 - 필자 외 일반 사용자를 위한 코드 리팩토링 및 간편화
