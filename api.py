@@ -3,7 +3,8 @@ from fastapi import APIRouter, Request
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 
-from router.character.kusanagi_nene import kusanagi_nene
+from router.character.KusanagiNene import KusanagiNene
+from router.character.SangonomiyaKokomi import SangonomiyaKokomi
 from router.category import category
 
 import argparse
@@ -43,7 +44,8 @@ host = args.bind_addr
 
 app = FastAPI()
 
-app.include_router(kusanagi_nene, prefix="/character")
+app.include_router(KusanagiNene, prefix="/character")
+app.include_router(SangonomiyaKokomi, prefix="/character")
 app.include_router(category, prefix="/category")
 
 @app.post("/")

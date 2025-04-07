@@ -13,6 +13,7 @@ from router.router_config import Config
 router_config = Config()
 models_base = router_config.models_base
 
+print(models_base)
 # models_base = os.path.abspath("tts_models")
 character = "SangonomiyaKokomi"
 gpt_path = os.environ.get("gpt_path", get_character_models(models_base, character, ".ckpt"))
