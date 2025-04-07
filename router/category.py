@@ -28,9 +28,10 @@ async def characters():
 @category.get("/{name}/emotions")
 async def emotions(name):
     category = os.path.join(models_base, name, "emotion")
-    emotions = [
-        os.path.splitext(emotion)[0]
-        for emotion in os.listdir(category)
-        if os.path.isfile(os.path.join(category, emotion))
+    print("category : ", category)
+    emotion_dirs = [
+        dir_name for dir_name in os.listdir(category)
+        if os.path.isdir(os.path.join(category, dir_name))
     ]
-    return { "emotions": emotions }
+
+    return {"emotions": emotion_dirs}
