@@ -22,7 +22,7 @@ from text import cleaned_text_to_sequence
 from text.cleaner import clean_text
 from module.mel_processing import spectrogram_torch
 from tools.my_utils import load_audio
-from tools import LangSegment                                   # 중국인 개발자가 만든 패키지 에러로 고쳐서 tools로 가져옴 (원본 pip install LangSegment)
+from tools import LangSegment                                   # 기존 pip install LangSegment 에서 패키지 에러가 발생해서 직접 설정
 import config as global_config
 import logging
 import subprocess
@@ -116,8 +116,7 @@ def get_phones_and_bert(text,language):
                     # 因无法区别中日文汉字,以用户输入为准
                     langlist.append(language)
                 textlist.append(tmp["text"])
-        # logger.info(textlist)
-        # logger.info(langlist)
+
         phones_list = []
         bert_list = []
         norm_text_list = []
@@ -302,7 +301,8 @@ elif stream_mode == "close":
     media_type = "wav"
 else:
     media_type = "ogg"
-logger.info(f"编码格式: {media_type}")
+
+logger.info(f"인코딩 형식: {media_type}")
 
 def change_sovits_weights(sovits_path):
     global vq_model, hps

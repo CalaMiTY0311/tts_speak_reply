@@ -19,7 +19,7 @@ category = APIRouter()
 
 @category.get("/characters")
 async def characters():
-    lst = [
+    characters = [
         name for name in os.listdir(models_base)
         if os.path.isdir(os.path.join(models_base, name))
     ]
@@ -33,4 +33,4 @@ async def emotions(name):
         for emotion in os.listdir(category)
         if os.path.isfile(os.path.join(category, emotion))
     ]
-    return { "emotions":emotions }
+    return { "emotions": emotions }

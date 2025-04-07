@@ -5,3 +5,7 @@
 ### v1.1
 - tts모델(캐릭터) 목록 조회하는 엔드포인트 구성   /category/characters
 - tts모델의 참조(감정)오디오 파일 리스트 조회하는  엔드포인트 구성 /category/{캐릭터이름}/emotions <- (확장자인 .mp3는 제거하여 감정 이름만 반환)
+
+### v1.2
+- 원신 캐릭터 산고노미야코코미 캐릭터 ttsmodel추가 (huggingface 에서 가져옴)
+- KusanagiNene 캐릭터 모델 퀄리티 업그레이드

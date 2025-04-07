@@ -26,3 +26,4 @@ dockerbuild.sh
 
 # model ignore
 /tts_models/KusanagiNene
+/tts_models/SangonomiyaKokomi

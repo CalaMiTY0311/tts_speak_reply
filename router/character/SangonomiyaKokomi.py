@@ -14,7 +14,7 @@ router_config = Config()
 models_base = router_config.models_base
 
 # models_base = os.path.abspath("tts_models")
-character = "KusanagiNene"
+character = "SangonomiyaKokomi"
 gpt_path = os.environ.get("gpt_path", get_character_models(models_base, character, ".ckpt"))
 sovits_path = os.environ.get("sovits_path", get_character_models(models_base, character, ".pth"))
 
@@ -22,8 +22,6 @@ change_sovits_weights(sovits_path)
 change_gpt_weights(gpt_path)
 
 default_emotion = "default.mp3"
-
-# refer_wav_path = get_emotion(character, "default.mp3")
 
 def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
     refer_wav_path = refer_wav_path
@@ -36,13 +34,13 @@ def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
     # wav_data_list = list(get_tts_wav(refer_wav_path, prompt_text, prompt_language, text, text_language))
     # # print("list : ", wav_data_list)
     # wav_data = b"".join(wav_data_list)
-    # print("wav_data : ", wav_data)
+    # print("wav_data : ", wav_data) 
     
     return StreamingResponse(get_tts_wav(refer_wav_path, prompt_text, text, text_language), media_type="audio/"+media_type)
 
-kusanagi_nene = APIRouter()
+SangonomiyaKokomi = APIRouter()
 
-@kusanagi_nene.post("/kusanagiNene")
+@SangonomiyaKokomi.post("/SangonomiyaKokomi")
 async def default(request: Request):
     json_post_raw = await request.json()
     if json_post_raw.get("emotion") == "":
