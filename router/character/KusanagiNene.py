@@ -8,12 +8,11 @@ from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse, JSONResponse
 from router.options import get_character_models, get_emotion, get_tts_wav, cut_text, media_type
 from router.options import change_gpt_weights, change_sovits_weights
-from router.router_config import Config
+from router.router_config import Config, ttsBase
 
 router_config = Config()
 models_base = router_config.models_base
 
-# models_base = os.path.abspath("tts_models")
 character = "KusanagiNene"
 gpt_path = os.environ.get("gpt_path", get_character_models(models_base, character, ".ckpt"))
 sovits_path = os.environ.get("sovits_path", get_character_models(models_base, character, ".pth"))
@@ -21,7 +20,6 @@ sovits_path = os.environ.get("sovits_path", get_character_models(models_base, ch
 change_sovits_weights(sovits_path)
 change_gpt_weights(gpt_path)
 
-default_emotion = "default.mp3"
 
 def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
     refer_wav_path = refer_wav_path
@@ -40,17 +38,18 @@ def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
 
 KusanagiNene = APIRouter()
 
-@KusanagiNene.post("/kusanagiNene")
-async def default(request: Request):
-    json_post_raw = await request.json()
-    if json_post_raw.get("emotion") == "":
-        refer_wav_path = get_emotion(models_base, character, default_emotion)
+@KusanagiNene.post("/KusanagiNene")
+async def default(data: ttsBase):
+    if data.emotion == "" or data.emotion is None:
+        print("asdf : ", data.emotion)
+        refer_wav_path = get_emotion(models_base, character)
     else:
-        refer_wav_path = get_emotion(models_base, character, json_post_raw.get("emotion"))
+        refer_wav_path = get_emotion(models_base, character, data.emotion)
+    
     return handle(
         refer_wav_path,
-        json_post_raw.get("prompt_text"),
-        json_post_raw.get("text"),
-        json_post_raw.get("text_language"),
-        json_post_raw.get("cut_punc"),
+        data.prompt_text,
+        data.text,
+        data.text_language,
+        data.cut_punc,
     )

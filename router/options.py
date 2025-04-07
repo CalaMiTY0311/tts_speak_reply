@@ -346,6 +346,7 @@ def only_punc(text):
 
 def get_tts_wav(ref_wav_path, prompt_text, text, text_language, top_k=20, top_p=0.6, temperature=0.6, ref_free=True):
 
+    print("text_language : ", text_language)
     refer_wav_path = ref_wav_path
     prompt_language = g_config.prompt_language
     t0 = ttime()
@@ -453,11 +454,25 @@ def get_character_models(base, name, model):
     else:
         for file in os.listdir(character):
             if file.endswith(model):
-                return os.path.join(character, file)                                                                        #캐릭터 .ckpt .pth 참조
+                return os.path.join(character, file)#캐릭터 .ckpt .pth 참조
+
 # 참조할 캐릭터의 감정
-def get_emotion(base, character, type):
-    refer_wav_path = os.path.join(base, character, "emotion", type)
-    return refer_wav_path
+# def get_emotion(base, character, type):
+#     refer_wav_path = os.path.join(base, character, "emotion", type)
+#     return refer_wav_path
+def get_emotion(base, character, emotion="default"):
+
+    emotion_folder_path = os.path.join(base, character, "emotion", emotion)
+    
+    if not os.path.isdir(emotion_folder_path):
+        return f"Error : {character} 의 감정 파일을 추가해 주세요"
+    
+    for refer_file in [".wav", ".mp3"]:
+        path = os.path.join(emotion_folder_path, f"{emotion}{refer_file}")
+        if os.path.isfile(path):
+            return path
+    
+    return f"Error : {character}의 {emotion} 감정 파일을 찾을 수 없습니다"
 
 def cut_text(text, punc):
     punc=[]
