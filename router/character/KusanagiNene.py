@@ -20,7 +20,6 @@ sovits_path = os.environ.get("sovits_path", get_character_models(models_base, ch
 change_sovits_weights(sovits_path)
 change_gpt_weights(gpt_path)
 
-
 def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
     refer_wav_path = refer_wav_path
     # if cut_punc == None: 

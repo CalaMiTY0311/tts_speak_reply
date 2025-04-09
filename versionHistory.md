@@ -9,3 +9,8 @@
 ### v1.2
 - 원신 캐릭터 산고노미야코코미 캐릭터 ttsmodel추가 (huggingface 에서 가져옴)
 - KusanagiNene 캐릭터 모델 퀄리티 업그레이드
+
+### v1.3
+- 영어 추론을 하기 위한 nltk의 averaged_perceptron_tagger_eng 패키지 감지 및 미설치되어있을 시 자동 설치 구현 
+- text_language 기본값을 "en"으로 설정하여, v1.3부터 영어 텍스트에 대한 추론 가능
+

@@ -238,7 +238,7 @@ parser.add_argument("-b", "--bert_path", type=str, default=g_config.bert_path, h
 # parser.add_argument("-g", "--gpt_path", type=str, default=g_config.gpt_path, help="GPT 모델 경로")
 # parser.add_argument("-dr", "--default_refer_path", type=str, default="testWav1.mp3", help="기본 참조 오디오 경로")
 # parser.add_argument("-dt", "--default_refer_text", type=str, default="今日から始まる映画が、身長差のあるバディ物で、一緒に見る人の身長差分、割引してくれる", help="기본 참조 오디오 텍스트")
-parser.add_argument("-dl", "--default_refer_language", type=str, default="all_ja", help="기본 참조 오디오 언어")
+# parser.add_argument("-dl", "--default_refer_language", type=str, default="all_ja", help="기본 참조 오디오 언어")
 parser.add_argument("-d", "--device", type=str, default=g_config.infer_device, help="cuda / cpu")
 parser.add_argument("-a", "--bind_addr", type=str, default="0.0.0.0", help="기본값: 0.0.0.0")
 parser.add_argument("-p", "--port", type=int, default=g_config.api_port, help="기본값: 9880")

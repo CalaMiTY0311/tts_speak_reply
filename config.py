@@ -19,7 +19,7 @@ bert_path = "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large"
 # pretrained_gpt_path = "tts_models/hello-e15.ckpt"               # gpt 모델 경로
 
 prompt_language = "all_ja"
-text_language = "ja"
+# text_language = "ja"
 
 exp_root = "logs"
 python_exec = sys.executable or "python"
@@ -60,7 +60,7 @@ class Config:
         self.infer_device = infer_device
 
         self.prompt_language = prompt_language
-        self.text_language = text_language
+        # self.text_language = text_language
 
         # self.webui_port_main = webui_port_main
         # self.webui_port_uvr5 = webui_port_uvr5
