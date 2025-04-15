@@ -13,4 +13,3 @@
 ### v1.3
 - 영어 추론을 하기 위한 nltk의 averaged_perceptron_tagger_eng 패키지 감지 및 미설치되어있을 시 자동 설치 구현 
 - text_language 기본값을 "en"으로 설정하여, v1.3부터 영어 텍스트에 대한 추론 가능
-

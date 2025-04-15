@@ -4,7 +4,7 @@ now_dir = os.getcwd()
 sys.path.append(now_dir)
 print(now_dir)
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 from router.options import get_character_models, get_emotion, get_tts_wav, cut_text, media_type
 from router.options import change_gpt_weights, change_sovits_weights
@@ -21,19 +21,25 @@ change_sovits_weights(sovits_path)
 change_gpt_weights(gpt_path)
 
 def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
-    refer_wav_path = refer_wav_path
-    # if cut_punc == None: 
-    #     text = cut_text(text,default_cut_punc)
-    # else:
-    #     text = cut_text(text,cut_punc)
-    text = cut_text(text,cut_punc)
+    try:
+        refer_wav_path = refer_wav_path
+        # if cut_punc == None: 
+        #     text = cut_text(text,default_cut_punc)
+        # else:
+        #     text = cut_text(text,cut_punc)
+        text = cut_text(text,cut_punc)
 
-    # wav_data_list = list(get_tts_wav(refer_wav_path, prompt_text, prompt_language, text, text_language))
-    # # print("list : ", wav_data_list)
-    # wav_data = b"".join(wav_data_list)
-    # print("wav_data : ", wav_data) 
+        # wav_data_list = list(get_tts_wav(refer_wav_path, prompt_text, prompt_language, text, text_language))
+        # # print("list : ", wav_data_list)
+        # wav_data = b"".join(wav_data_list)
+        # print("wav_data : ", wav_data) 
+
+        return StreamingResponse(get_tts_wav(refer_wav_path, prompt_text, text, text_language), media_type="audio/"+media_type)
     
-    return StreamingResponse(get_tts_wav(refer_wav_path, prompt_text, text, text_language), media_type="audio/"+media_type)
+    except Exception as e:
+        # 개발 시 참고용 로그 (배포 시 주석 가능)
+        # traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 SangonomiyaKokomi = APIRouter()
 

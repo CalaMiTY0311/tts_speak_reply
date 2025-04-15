@@ -41,8 +41,6 @@ def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
         # traceback.print_exc()
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-    
-     
 
 KusanagiNene = APIRouter()
 
