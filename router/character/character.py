@@ -6,19 +6,23 @@ print(now_dir)
 
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
-from router.options import get_character_models, get_emotion, get_tts_wav, cut_text, media_type
-from router.options import change_gpt_weights, change_sovits_weights
-from router.router_config import Config, ttsBase
+from pydantic import BaseModel
+from typing import Optional
+
+from src.generator import get_character_models, get_emotion, get_tts_wav, cut_text, media_type
+from src.generator import change_gpt_weights, change_sovits_weights
+from src.router_config import Config, ttsBase
 
 router_config = Config()
+
+class ttsBase(BaseModel):
+    emotion:Optional[str] = None
+    prompt_text: Optional[str] = ""
+    text: str
+    text_language:str
+    cut_punc: bool
+
 models_base = router_config.models_base
-
-character = "KusanagiNene"
-gpt_path = os.environ.get("gpt_path", get_character_models(models_base, character, ".ckpt"))
-sovits_path = os.environ.get("sovits_path", get_character_models(models_base, character, ".pth"))
-
-change_sovits_weights(sovits_path)
-change_gpt_weights(gpt_path)
 
 def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
     try:
@@ -28,29 +32,32 @@ def handle(refer_wav_path, prompt_text, text, text_language, cut_punc):
         # else:
         #     text = cut_text(text,cut_punc)
         text = cut_text(text,cut_punc)
-
-        # wav_data_list = list(get_tts_wav(refer_wav_path, prompt_text, prompt_language, text, text_language))
-        # # print("list : ", wav_data_list)
-        # wav_data = b"".join(wav_data_list)
-        # print("wav_data : ", wav_data) 
-
         return StreamingResponse(get_tts_wav(refer_wav_path, prompt_text, text, text_language), media_type="audio/"+media_type)
     
     except Exception as e:
-        # 개발 시 참고용 로그 (배포 시 주석 가능)
-        # traceback.print_exc()
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-KusanagiNene = APIRouter()
+character = APIRouter()
 
-@KusanagiNene.post("/KusanagiNene")
-async def default(data: ttsBase):
+@character.post("/{name}")
+async def default(data: ttsBase, name):
+    model_manager = ModelManager(models_base, name)
+    if name not in model_manager.characters:
+        raise HTTPException(status_code=404, detail=f"Character '{name}' not found")
+    
+    # Check if model is loaded, if not, load it
+    if not model_manager.is_model_loaded(name):
+        try:
+            model_manager.load_model_for_character(name)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Failed to load model for {name}: {str(e)}")
+    
+    # Get emotion reference
     if data.emotion == "" or data.emotion is None:
-        print("asdf : ", data.emotion)
-        refer_wav_path = get_emotion(models_base, character)
+        refer_wav_path = get_emotion(models_base, name)
     else:
-        refer_wav_path = get_emotion(models_base, character, data.emotion)
+        refer_wav_path = get_emotion(models_base, name, data.emotion)
     
     return handle(
         refer_wav_path,
@@ -59,3 +66,7 @@ async def default(data: ttsBase):
         data.text_language,
         data.cut_punc,
     )
+
+@character.get("/test/1")
+async def test():
+    return {"asdf" : "asdf"}

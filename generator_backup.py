@@ -4,10 +4,9 @@ import sys
 
 now_dir = os.getcwd()
 sys.path.append(now_dir)
-sys.path.append("%s/GPT_SoVITS" % (now_dir))
+sys.path.append("%s/GPT_SoVITS_tools/GPT_SoVITS" % (now_dir))
 
 import signal
-from tools import LangSegment
 from time import time as ttime
 import torch
 import librosa
@@ -21,9 +20,9 @@ from AR.models.t2s_lightning_module import Text2SemanticLightningModule
 from text import cleaned_text_to_sequence
 from text.cleaner import clean_text
 from module.mel_processing import spectrogram_torch
-from tools.my_utils import load_audio
-from tools import LangSegment                                   # 기존 pip install LangSegment 에서 패키지 에러가 발생해서 직접 설정
-import config as global_config
+from GPT_SoVITS_tools.tools.my_utils import load_audio
+from GPT_SoVITS_tools.tools import LangSegment                                   # 기존 pip install LangSegment 에서 패키지 에러가 발생해서 직접 설정
+import src.config as global_config
 import logging
 import subprocess
 import uvicorn
