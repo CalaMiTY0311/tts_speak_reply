@@ -99,13 +99,5 @@ app.include_router(category, prefix="/category")
 async def test():
     return {"asdf" : "asdf"}
 
-@app.post("/test")
-async def test():
-    character_name = "KusanagiNene"  # 여기에 확인하고 싶은 캐릭터 이름 넣어줘
-    return  { "model" : model_manager.loaded_models[character_name]}
-
-    
-
-
 if __name__ == "__main__":
     uvicorn.run(app, host=host, port=port, workers=1)
