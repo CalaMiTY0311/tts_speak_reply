@@ -1,4 +1,4 @@
-## TTS-SPEAK_Reply JP API v1.3
+## TTS-SPEAK_Reply API v1.4
 
 ## 소개 
 - GPT-Sovits로 만든 TTS모델(일본어,영어)을 활용하여 텍스트를 wav형태로 스트리밍하여 결과를 보여주는 API입니다. 
