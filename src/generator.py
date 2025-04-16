@@ -347,7 +347,7 @@ def only_punc(text):
 
 # def get_tts_wav(character, ref_wav_path, prompt_text, text, text_language, top_k=20, top_p=0.6, temperature=0.6, ref_free=True):
 def get_tts_wav(ref_wav_path, prompt_text, text, text_language, 
-                t2s_model, vq_model, ssl_model, hps, config, hz, max_sec,
+                t2s_model, config, hz, max_sec, vq_model,hps, 
                 top_k=20, top_p=0.6, temperature=0.6, ref_free=True):
 
     print("text_language : ", text_language)
@@ -459,11 +459,7 @@ def get_character_models(base, name, model):
         for file in os.listdir(character):
             if file.endswith(model):
                 return os.path.join(character, file)#캐릭터 .ckpt .pth 참조
-
-# 참조할 캐릭터의 감정
-# def get_emotion(base, character, type):
-#     refer_wav_path = os.path.join(base, character, "emotion", type)
-#     return refer_wav_path
+            
 def get_emotion(base, character, emotion="default"):
 
     emotion_folder_path = os.path.join(base, character, "emotion", emotion)

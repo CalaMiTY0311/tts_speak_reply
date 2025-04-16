@@ -15,9 +15,6 @@ bert_path = "GPT_SoVITS_tools/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-e
 # pretrained_sovits_path = "GPT_SoVITS/pretrained_models/s2G488k.pth"
 # pretrained_gpt_path = "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt"
 
-# pretrained_sovits_path = "tts_models/hello_e8_s6592.pth"        # sovits모델 경로
-# pretrained_gpt_path = "tts_models/hello-e15.ckpt"               # gpt 모델 경로
-
 prompt_language = "all_ja"
 # text_language = "ja"
 

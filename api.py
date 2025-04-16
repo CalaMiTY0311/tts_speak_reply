@@ -77,6 +77,7 @@ async def lifespan(app: FastAPI):
     # 모델 로드
     try:
         await model_manager.load_all_models()
+        print("Models loaded:", list(model_manager.loaded_models.keys()))
         print("🔧 모든 모델 로드 완료")
     except Exception as e:
         print(f"❌ 모델 로드 실패: {str(e)}")
@@ -101,8 +102,9 @@ async def test():
 @app.post("/test")
 async def test():
     character_name = "KusanagiNene"  # 여기에 확인하고 싶은 캐릭터 이름 넣어줘
-    is_loaded = model_manager.is_model_loaded(character_name)
-    return {"character": character_name, "is_model_loaded": is_loaded}
+    return  { "model" : model_manager.loaded_models[character_name]}
+
+    
 
 
 if __name__ == "__main__":

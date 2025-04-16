@@ -1,6 +1,6 @@
-import os,sys
+import os, sys
 from pydantic import BaseModel
-from typing import Optional,Dict,Any
+from typing import Optional, Dict, Any
 
 now_dir = os.getcwd()
 sys.path.append(now_dir)
@@ -10,31 +10,48 @@ from src.util import get_character_models
 
 models_base = os.path.abspath("tts_models")
 characters = [
-        name for name in os.listdir(models_base)
-        if os.path.isdir(os.path.join(models_base, name))
-    ]
+    name for name in os.listdir(models_base)
+    if os.path.isdir(os.path.join(models_base, name))
+]
 
 class ModelManager:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(ModelManager, cls).__new__(cls)
+            cls._instance.models_base = models_base
+            cls._instance.loaded_models = {}
+            cls._instance.characters = characters
+            cls._instance._initialized = False
+        return cls._instance
+    
     def __init__(self):
-        self.models_base = models_base
-        self.loaded_models: Dict[str, Dict[str, Any]] = {}
-        self.characters = characters
-
-        print(self.characters)
+        if not self._initialized:
+            self._initialized = True
+            print(self.characters)
     
     async def load_all_models(self):
+        # # 이미 모델이 로드되었는지 확인
+        # if self.loaded_models and len(self.loaded_models) == len(self.characters):
+        #     print("Models already loaded")
+        #     return
+            
         try:
             for character in self.characters:
+                # # 이미 로드된 캐릭터는 건너뛰기
+                # if character in self.loaded_models and self.loaded_models[character].get("loaded", False):
+                #     print(f"Model for {character} already loaded, skipping...")
+                #     continue
+                    
                 print(f"Attempting to load models for {character}...")
 
-                # 모델 경로 가져오기
                 gpt_path = os.environ.get("gpt_path", get_character_models(self.models_base, character, ".ckpt"))
                 sovits_path = os.environ.get("sovits_path", get_character_models(self.models_base, character, ".pth"))
 
                 print(f"gpt_path: {gpt_path}")
                 print(f"sovits_path: {sovits_path}")
 
-                # 모델 가중치 변경 함수 호출 및 반환값 저장
                 print(f"Loading GPT weights for {character}...")
                 t2s_model, config, hz, max_sec = change_gpt_weights(gpt_path)
 
@@ -53,22 +70,24 @@ class ModelManager:
                     "max_sec": max_sec,
 
                     #schange_sovits_weights
-                    "vq_model":vq_model,
-                    "hps":hps,
+                    "vq_model": vq_model,
+                    "hps": hps,
 
                     "loaded": True
                 }
-                # print(f"loaded_models updated: {self.loaded_models}")
+                
                 print("load complete")
         except Exception as e:
             print(f"Error loading models for {character}: {str(e)}")
+            
+        print(f"All models loaded. Available models: {list(self.loaded_models.keys())}")
     
     ###############
     def is_model_loaded(self, character: str) -> bool:
         """특정 캐릭터의 모델이 로드되었는지 확인"""
         if character not in self.loaded_models:
             return False
-        return self.loaded_models[character]
+        return self.loaded_models[character].get("loaded", False)
     
     def are_all_models_loaded(self) -> bool:
         """모든 캐릭터의 모델이 로드되었는지 확인"""
@@ -76,25 +95,6 @@ class ModelManager:
             if not self.is_model_loaded(character):
                 return False
         return True
-
-    # def load_model_for_character(self, character: str):
-    #     """특정 캐릭터의 모델만 로드"""
-    #     if character not in self.characters:
-    #         raise ValueError(f"Character {character} not found")
-            
-    #     gpt_path = os.environ.get("gpt_path", get_character_models(self.models_base, character, ".ckpt"))
-    #     sovits_path = os.environ.get("sovits_path", get_character_models(self.models_base, character, ".pth"))
-        
-    #     change_gpt_weights(gpt_path)
-    #     change_sovits_weights(sovits_path)
-        
-    #     self.loaded_models[character] = {
-    #         "gpt_path": gpt_path,
-    #         "sovits_path": sovits_path,
-    #         "loaded": True
-    #     }
-        
-    #     print(f"Models for {character} loaded successfully")
 
 if __name__ == "__main__":
     import asyncio

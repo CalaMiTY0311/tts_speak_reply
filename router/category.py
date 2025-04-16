@@ -5,9 +5,10 @@ sys.path.append(now_dir)
 
 from fastapi import APIRouter
 
-from src.router_config import Config
+from src.loadModel import ModelManager
+# from src.router_config import Config
 
-router_config = Config()
+router_config = ModelManager()
 models_base = router_config.models_base
 
 # lst = [
@@ -17,7 +18,7 @@ models_base = router_config.models_base
 
 category = APIRouter()
 
-@category.get("/index")
+@category.get("/characters")
 async def characters():
     characters = [
         name for name in os.listdir(models_base)
