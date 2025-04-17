@@ -38,7 +38,7 @@
    ```
 
 ## API 명세서
-- 자세한 API 사용법은 [깃북 문서](https://app.gitbook.com/o/S36xxi8gV9pHeLH2I2iI/s/mpnkOjEZrUEPuL0LUtLW/)를 참고하세요.
+- 자세한 API 사용법은 [깃북 문서](https://expressauthkit.gitbook.io/tts-speak-reply/)를 참고하세요.
 
 ## 참고 사항
 - 텍스트(`text`)가 길어질수록 음성 퀄리티가 낮아질 수 있습니다 (추후 개선 예정).

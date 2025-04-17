@@ -17,11 +17,6 @@ def get_character_models(base, name, model):
         for file in os.listdir(character):
             if file.endswith(model):
                 return os.path.join(character, file)#캐릭터 .ckpt .pth 참조
-
-# 참조할 캐릭터의 감정
-# def get_emotion(base, character, type):
-#     refer_wav_path = os.path.join(base, character, "emotion", type)
-#     return refer_wav_path
             
 def get_emotion(base, character, emotion="default"):
 

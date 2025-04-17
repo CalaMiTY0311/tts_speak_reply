@@ -491,3 +491,41 @@ def cut_text(text, punc):
         text = text.replace("\n\n", "\n")
 
     return text
+
+# 일본어 문장 나누는 함수
+# import MeCab
+# def split_text_by_mecab(text, length=30):
+#     tagger = MeCab.Tagger("-Owakati")  # 단어 단위로 띄어쓰기
+#     words = tagger.parse(text).strip().split()
+    
+#     result, current = [], ""
+#     for word in words:
+#         if len(current) + len(word) > length:
+#             result.append(current)
+#             current = word
+#         else:
+#             current += (" " if current else "") + word
+
+#     if current:
+#         result.append(current)
+
+#     return result
+
+############### test
+def get_tts_data(ref_wav_path, prompt_text, text, text_language, 
+                t2s_model, config, hz, max_sec, vq_model,hps, 
+                top_k=20, top_p=0.6, temperature=0.6, ref_free=True):
+
+    generator = get_tts_wav(ref_wav_path, prompt_text, text, text_language, 
+                               t2s_model, config, hz, max_sec, vq_model, hps, 
+                               top_k, top_p, temperature, ref_free)
+    audio_chunks = list(generator)
+    
+    # 바이트 데이터인 경우 합치기
+    if isinstance(audio_chunks[0], bytes):
+        data = b''.join(audio_chunks)
+    else:  # NumPy 배열인 경우
+        data = np.concatenate(audio_chunks)
+    
+    # data 반환 (이제 이 데이터를 wav 파일로 변환할 수 있음)
+    return data
