@@ -5,6 +5,7 @@
 git clone https://huggingface.co/lj1995/GPT-SoVITS
 ```
 다운로드된 폴더 내용물을 `GPT_SoVITS_tools/GPT_SoVITS/pretrained_models`에 복사
+![ㅇㅇ](https://github.com/CalaMiTY0311/tts_speak_reply/blob/main/guideImg/img1.jpg)
 
 ## 2. ffmpeg, ffprobe 설치
 [ffmpeg 다운로드 페이지](https://ffmpeg.org/download.html)에서 다운로드 후 실행 파일을 최상위 디렉토리(api.py와 같은 위치)에 배치
