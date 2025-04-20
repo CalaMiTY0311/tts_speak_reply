@@ -10,30 +10,16 @@
 - OS: Windows
 - Python: 3.8
 ```
-### GetStart (클론 후 C: 또는 D: 드라이브 루트와 같은 적절한 위치에 이동시키는 것을 권장합니다)
+
+### 
 ```bash
+   # 프로젝트 다운로드
    git clone https://github.com/CalaMiTY0311/tts_speak_reply.git
+   # 의존성 설치
    pip install -r requirements.txt
    ```
 
-## 준비해주세요
-1. 캐릭터 TTS모델과 참조 오디오 (없다면 아래 제공된 캐릭터 모델을 사용해주세요)
-2. ffmpeg.exe, ffprobe.exe - 윈도우 환경에서는 모든 동영상, 음악, 사진 포맷들의 디코딩과 인코딩을 도와주는 두개의 실행 파일이 필요함 (없다면 밑에 URL주소에 가서 다운로드)
-3. 좋은 CPU (성능이 낮으면 추론 속도가 느릴 수 있습니다.)
-   - 참고: i5-11세대 CPU 기준, 104자(특수부호 포함) 텍스트 추론 시간 약 16초
-   - 첫 추론 시에는 22초 정도 소요되며, 이후 추론은 더 빠릅니다
-
-### 🛠 TTS모델과 ffmpeg, ffprobe가 없다면?
-#### [모델 폴더 다운로드](https://drive.google.com/file/d/1u9ockMEWKw1iTulXYzRGk8pq3DCS9MZb/view?usp=drive_link)(필자의 구글 드라이브 URL)에서 tts_models.zip을 다운받아 압축을 푼 후에 최상위 디렉토리에 위치해주세요 (api.py와 같은 위치)
-#### [ffmpeg, ffprobe](https://ffmpeg.org/download.html)에서 다운받아 두개의 실행파일을 최상위 디렉토리에 위치해주세요 (잘 모르겠다면 [여기](https://kminito.tistory.com/108) 가이드를 참고해주세요
-#### 필자가 제공하는 TTS 모델 목록을 확인하고 싶다면? [https://expressauthkit.gitbook.io/tts-speak-reply](https://expressauthkit.gitbook.io/tts-speak-reply/)를 참고해주세요
-
-## 준비가 완료 되었다면 실행부터 테스트까지 따라해봐요
-### 
-
-
-## 참고 사항
-- 텍스트(`text`)가 길어질수록 음성 퀄리티가 낮아질 수 있습니다 (추후 개선 예정).
+### [준비부터 실행, 추론까지 가이드는 여기](https://github.com/CalaMiTY0311/tts_speak_reply/blob/main/roadToRunProgram.md)
 
 ## 업데이트 내역
 ### v1.4 (최신)
