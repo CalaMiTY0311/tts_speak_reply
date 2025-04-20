@@ -19,7 +19,7 @@
    pip install -r requirements.txt
    ```
 
-### [준비부터 실행, 추론까지 가이드는 여기](https://github.com/CalaMiTY0311/tts_speak_reply/blob/main/roadToRunProgram.md)
+### [정상적 으로 실행 하려면 여기 가이드를 보고 따라해주세요](https://github.com/CalaMiTY0311/tts_speak_reply/blob/main/roadToRunProgram.md)
 
 ## 업데이트 내역
 ### v1.4 (최신)
