@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 
 from contextlib import asynccontextmanager
-from src.setup import load_nltk, load_models
+from src.setup import load_nltk
 
 from router.character.character import character
 from router.category import category
